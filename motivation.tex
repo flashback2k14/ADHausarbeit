@@ -1,0 +1,55 @@
+Das naheliegendste Beispiel f\"ur ein Flussproblem ist eine 
+Firma die Waren in einer Fabrik $s$ produziert und 
+kontinuierlich zu ihrer Verkaufstelle $t$ transportieren m\"ochte. 
+Dabei stehen verschiedene Zwischenlager 
+(Knoten $v \in V \setminus \{s,t\}$)  zur Verf\"ugung und eine 
+maximale Menge $\kappa(u,v)$ kann in einem Tag von einem 
+Zwischenlager (oder Fabrik) zu einem anderen Zwischenlager 
+(oder Verkaufstelle) transportiert werden. Unterschiedliche Kosten
+f\"ur Transportwege treten bei dem Benutzten von verschiedenen 
+Transportmitteln, z.B. LKW, Zug oder Flugzeug, auf. 
+
+Als weiteres Beispiel sei die Paarung von m\"oglichen Partner 
+einer Partnerb\"orse genannt. Gegeben sei eine Menge $A$ von 
+Frauen und eine Menge $B$ von M\"annern. 
+Durch soziologische Pr\"aferenzen von Frauen und  M\"anner 
+ergeben sich potentielle Paarungen $E \subseteq A \times B$
+zwischen den beiden Gruppen. Der Betreiber einer Partnerb\"orse 
+m\"ochte nun m\"oglichst viele
+solcher potentiellen Paare mit einander zusammenbringen.
+Dabei soll kein Partner in mehreren Paarungen auftreten. 
+Das algorithmische Problem hierbei das Finden eines 
+\emph{maximalen Matchings}, d.h. eine Kantenmenge 
+$M \subset E$ des bipartiten Graphen $G = (A \cup B, E)$ mit 
+maximaler Gr\"o\ss e, so dass der Teilgraph von $G$ der nur 
+die Kanten $M$ besitzt Maximalgrad $1$ hat. Ein maximales Matching
+kann gefunden werden in dem zu $G$ eine k\"unstliche Quelle $s$, 
+die eine gerichtete Kante zu jedem Knoten aus $A$ erh\"alt, 
+und eine Senke $t$, zu der eine gerichtete Kante von jedem 
+Knoten in $B$ f\"uhrt, hinzugef\"ugt wird. Weiterhin wird jede
+Kante in $E$ von $A$ nach $B$ gerichtet und wir geben jeder 
+Kante Kapazit\"at eins. Es ist leicht zu sehen, 
+dass ein Maximaler Fluss in diesem Graphen einem Maximalen 
+Matching in $G$ entspricht: $M$ entspricht allen Kanten von $A$
+nach $B$ mit Fluss $1$. \cite{schoening, algo}
+
+%\footnote{
+%Es ist zu bermerken das dieses Beispiel in Bezug auf Diversit\"at
+%ungeeignet ist und dass in der realen Welt gleichgeschlechtliche 
+%Beziehungen existieren. Da jedoch die hier erl\"auterten 
+%Algorithmen nur mit bipartiten Graphe korrekt funktionieren wurde
+%dieses ansonsten sehr anschauliche Beispiel gew\"ahlt.
+%}.
+
+%Weitere Anwendungsgebiete sind mit der aus der Graphentheorie 
+%bekannten \"Aquivalenz von maximalen F\"ussen und minimalen S
+%Schnitten zu entdecken. Ein \emph{minmaler Schnitte} f\"ur 
+%zwei Knoten $s,t$ eines Graphen $G = (V,E)$ is eine Teilmenge
+% $S \subseteq E$ der Kanten mit minimaler Gr\"o\ss e, 
+%so dass nach Entfernen von $S$ aus $G$ kein Weg von $s$ nach $t$ 
+%mehr existiert. Wenn wir uns $s$ als das Versorgungsdepot 
+%und $t$ als Frontlinie eines milit\"arischen Gegners vorstellen, 
+%und $G$ das zugrunde liegende Transportnetzwerk ist, kann 
+%ein minimaler Schnitt in $G$ als der effizienteste Angriffsplan
+%interpretiert werden, um die Lieferung von Nachsch\"uben aus 
+%dem Versorgungsdepot and die Front zu unterbinden.

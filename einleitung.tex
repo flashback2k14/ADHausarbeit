@@ -1,0 +1,38 @@
+Ein \emph{Netzwerk} ist ein gerichteter Graph $G=(V,E)$ mit 
+einer 
+Kapazit\"atsfunktion $\kappa: V \times V \rightarrow \N$ 
+die jeder Kante 
+eine maximale Kapazit\"at zuordnet und zwei dedizierten Knoten
+$s,t \in V$. Der Knoten $s$ ist die \emph{Quelle} und 
+besitzt nur ausgehende Kanten. Der Knoten $t$ wird als 
+\emph{Senke} bezeichnet und besitzt nur eingehende Kanten. 
+Ein \emph{Fluss} ist eine Funktion $f: V \times V \rightarrow \N$ 
+die jeder Kante 
+eine Anzahl an Einheiten zuordnet (Kapazit\"at), die \"uber die Kante 
+transportiert werden. Wir nennen einen Fluss \emph{zul\"assig}
+wenn f\"ur alle Kanten. $(u,v) \in E$ folgendes gilt
+\begin{enumerate}
+ \item $f(u,v) \leq \kappa(u,v)$, d.h.~der Fluss darf die 
+ maximale Kapazit\"at der Kanten nicht \"uberschreiten
+ \item f\"ur alle Knoten $v \in V\setminus \{s,t\}$ ist
+ $\sum_{(u,v)\in E}f(u,v) = \sum_{(v,u)\in E}f(v,u)$. 
+\end{enumerate}
+Die zweite Bedingung ist auch als Kirchhoffsches Gesetz bekannt. 
+Der \emph{Wert} eines Fluss $|f|$ ist die Summe der 
+von $s$ ausgehenden Einheiten, d.h., 
+$|f| = \sum_{(s,v) \in E}f(s,v)$. 
+Das \emph{Maximale Fluss Problem} fragt nach dem zul\"assigen
+Fluss $f$ f\"ur ein gegebenes Netzwerk $G$, der den maximalen 
+Wert hat. Zus\"atzlich zu den Kapazit\"aten der Kanten kann 
+eine Gewichtsfunktions $c: V \times V \rightarrow \N$ gegeben 
+sein, so dass das transportieren einer Einheit \"uber eine Kante $(u,v)$
+Kosten $c(u,v)$ verursacht. Dies f\"uhrt zur Definition des
+\emph{Gewichtes} $w(f)$ eines Flusses als die Summe der 
+Produkte des Gewichtes und des Flusses der Kanten. 
+Die Eingabe f\"ur das \emph{Kostenminimale Fluss Problem} ist 
+ein Netzwerk $G$ mit einer Kostenfunktion $c$ und einem maximalen 
+Wert $F$. Gesucht wird nach einem Fluss in $G$ mit Wert mindestens
+$F$ der die minimalen Kosten unter allen solchen Fl\"ussen besitzt.
+Das Maximale Fluss Problem entspricht hier dem
+Kostenminimalem Fluss Problem mit dem $c(u,v) = 1$ f\"ur alle 
+$(u,v) \in E$ und $F = \infty$. \cite{schoening, kripfganz, algo}

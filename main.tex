@@ -1,0 +1,85 @@
+\documentclass[a4paper, 10pt]{article}
+%--------------------------------------
+% Ränder + Abstände
+%--------------------------------------
+\usepackage[left=30mm,right=20mm,top=25mm,headsep=15mm]{geometry}
+\usepackage[onehalfspacing]{setspace}
+%--------------------------------------
+% encoding
+%--------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%--------------------------------------
+% German-specific commands
+%--------------------------------------
+\usepackage[ngerman]{babel}
+%--------------------------------------
+% Mathe
+%--------------------------------------
+\usepackage[noend, linesnumbered, boxed]{algorithm2e}
+\usepackage{amsmath, amsthm, amssymb}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator{\N}{\mathbb{N}}
+%--------------------------------------
+% Pseudocode
+%--------------------------------------
+\usepackage{listings}
+\lstset{language=Python, frame=single, breaklines=true, numbers=left, 
+numbersep=10pt, basicstyle=\footnotesize, captionpos=b,
+xleftmargin=20pt, framexleftmargin=0pt, framexrightmargin=-5pt}
+%--------------------------------------
+% Quellenverzeichnis 
+%--------------------------------------
+\usepackage{csquotes}
+\usepackage[backend=biber,defernumbers,sorting=none,firstinits=true]{biblatex}
+\addbibresource{biblo.bib}
+%--------------------------------------
+% Dokument
+%--------------------------------------
+\begin{document}
+%--------------------------------------
+% Deckblatt
+%--------------------------------------
+\input{deckblatt}
+%--------------------------------------
+% Inhaltsverzeichnis
+%--------------------------------------
+\newpage
+\pagenumbering{Roman}
+\tableofcontents
+%--------------------------------------
+% Einleitung
+%--------------------------------------
+\clearpage 
+\pagenumbering{arabic} 
+\section{Einleitung}
+\input{einleitung}
+%--------------------------------------
+% Motivation
+%--------------------------------------
+\section{Motivation}
+\input{motivation}
+%--------------------------------------
+% Beschreibung
+%--------------------------------------
+\section{Beschreibung \& Komplexität}
+\input{beschreibung}
+%--------------------------------------
+% Ergebnis
+%--------------------------------------
+\section{Ergebnis}
+\input{ergebnis}
+%--------------------------------------
+% Quellen
+%--------------------------------------
+\newpage
+\section{Quellenverzeichnis}
+\printbibliography
+%--------------------------------------
+% Selbstständigkeit
+%--------------------------------------
+\newpage
+\section{Selbstständigkeitserklärung}
+\input{selbststaendig}
+
+\end{document}
