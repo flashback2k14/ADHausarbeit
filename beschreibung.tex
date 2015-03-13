@@ -3,79 +3,133 @@ man den $Busacker-Gowen-Algorithmus$. Dieser Algorithmus ist eine
 Weiterentwicklung der Algorithmen von $Ford-Fulkerson$ und $Edmonds-Karp$. 
 Das Problem dieser Algorithmen ist, dass diese nicht kostenminimal arbeiten. 
 Der Algorithmus von $Ford-Fulkerson$ kommt zum Einsatz zur Bestimmung eines 
-maximalen Flusses zwischen einer Quelle $s$ und einer Senke $t$. Zu Beginn 
-wird der Algorithmus mit einem bestehenden Fluss, z.B.: Nullfluss 
-initialisiert. Anschließend wird ein Weg von der Quelle $s$ zur Senke $t$ 
-gesucht auf dem alle Kanten positive Kapazitäten besitzen. Im nächsten 
-Schritt wird der Fluss um die kleinste Kapazität auf diesem Pfad $p$
-erhöht. Dieser Vorgang erfolgt solange bis kein Pfad im Netzwerk $N$ mit 
-positiven Kanten existiert. Die Laufzeit beträgt $O(|V(G)| + |E(G)|)$ 
-\cite{algo, optiv}\\
+maximalen Flusses zwischen einer Quelle $s$ und einer Senke $t$. 
 
-\lstset{caption={Ford-Fulkerson-Algorithmus}, language={Python}}
+\lstset{caption={Ford-Fulkerson-Algorithmus}, language={VBScript}}
 \begin{lstlisting}
-Ford-Fulkerson(G,s,t)
+FordFulkerson(G,s,t)
     for jede Kante (u,v) in G.E 
         (u,v).f = 0
-    while es existiert ein Pfad p von s nach t im Restnetzwerk G von f
+    end for
+    
+    while es existiert ein Pfad p von s nach t im Restnetzwerk G von f do
        c von f = min {c von f(u,v) : (u,v) gehoert zu p}
        for jede Kante (u,v) von p
             if (u,v) in G.E
                 (u,v).f = (u,v) + c von f(p)
             else
                 (v,u).f = (v,u).f - c von f(p)
+            end if
+        end for
+    end while
 \end{lstlisting}
 
+Zu Beginn wird der Algorithmus mit einem bestehenden Fluss, z.B.: Nullfluss 
+initialisiert. Anschließend wird ein Weg von der Quelle $s$ zur Senke $t$ 
+gesucht auf dem alle Kanten positive Kapazitäten besitzen. Im nächsten 
+Schritt wird der Fluss um die kleinste Kapazität auf diesem Pfad $p$
+erhöht. Dieser Vorgang erfolgt solange bis kein Pfad im Netzwerk $N$ mit 
+positiven Kanten existiert. Die Laufzeit beträgt $O(|V(G)| + |E(G)|)$ ,
+weil \textbf{TODO: ???}. \cite{algo, optiv}\\
+
 Im Gegenteil dazu implementiert der Algorithmus von $Edmonds-Karp$ zur 
-Berechnung des Pfads $p$ eine Breitensuche. Die Breitensuche wählt für den 
+Berechnung des Pfads $p$ eine Breitensuche. 
+
+\lstset{caption={Edmonds-Karp-Algorithmus}, language={VBScript}}
+\begin{lstlisting}
+EdmondsKarp(G,s,t)
+    for jede Kante (u,v) in G.E 
+        (u,v).f = 0
+    end for
+    
+    while es existiert ein Pfad p von s nach t im Restnetzwerk G von f do
+        1. sei p ein Pfad von s nach t in G von f mit minimaler Anzahl von Konten
+        2. Vergroessere f mit p
+        3. Aktualisiere G von f
+    end while
+\end{lstlisting}
+
+Die Breitensuche wählt für den 
 Pfad $p$ einen kürzesten Pfad von $s$ nach $t$ aus, wobei jede Kante das 
 Gewicht / Distanz 1 erhält. Daraus folgt eine Laufzeitverbesserung auf 
-$O(|V(G)| + |E(G)|^2)$ \cite{algo, optiv}
+$O(|V(G)| + |E(G)|^2)$, weil \textbf{TODO: ???}. \cite{algo, optiv, edmkarp} Der 
+$Busacker-Gowen-Algorithmus$ verfolgt die Idee einen kostenminimalen 
+Fluss von $s$ nach $t$ zu konstruieren. 
 
-Der $Busacker-Gowen-Algorithmus$ verfolgt die Idee einen kostenminimalen 
-Fluss von $s$ nach $t$ zu konstruieren. Der Start bildet entweder ein 
-Nullfluss oder ein gegebener Fluss. Das Ziel ist das Finden eines vorgebenen 
-bzw. maximalen Flusses, d.h. erreichen der Maximalkapazität. Dies wird 
-erreicht in dem man bei jedem Durchgang einen flussvergrößernden Pfad $p$ im 
-Inkrementnetzwerk von $s$ nach $t$ sucht, der unter allen $s-t-Pfaden$ die 
-kleinsten Kosten verursacht. Der Algorithmus lässt sich in 2 Schritte 
-unterteilen:
-\begin{enumerate}
- \item Bestimmung des kürzesten Weges von $s$ nach $t$
- \item Vergrößerung Fluss und Neuberechnung Inkrementdigraph bis vorgegebene 
- Wert oder Maximalkapazität des Netzwerkes $N$ erreicht ist. 
-\end{enumerate}
-Im ersten Schritt konstruiert man einen bewerteten Inkrementdigraph aus dem 
-Netzwerk $N$ für jede gerichtete Kante $(i,j)$ aus $N$ mit $f_{ij} < l_{i,j}$
-mit der Bewertung $c_{ij}$. Des Weiteren wir für jede gerichtete Kante 
-$(i,j)$ von $N$ mit $f_{ij} > 0$ eine umgekehrt gerichtete Kante $(j,i)$ mit 
-der Bewertung $-c_{ij}$ dem Graphen hinzugefügt. Im Anschluss wird mittels 
-eines kürzeste-Wege-Algorithmus ein $s-t-Pfad$ ermittelt, welcher 
-gleichzeitig ein flussvergrößernder und kostenminimaler Weg in $N$ ist. Der 
-Schritt 2 wird solange durchgeführt bis die vorgegebene Flussstärke erreicht
-oder bis keine weitere Flussvergrößerung möglich ist. Für ein 
-Inkrementnetzwerk gelten
-folgende Bedienungen:
+\lstset{caption={Busacker-Gowen-Algorithmus}, language={VBScript}}
+\begin{lstlisting}
+BusackerGowen(G,s,t)
+    for jede Kante (u,v) in G.E 
+        (u,v).f = 0
+    end for
+    
+    while es existiert ein Pfad p von s nach t im Restnetzwerk G von f do
+        1. Bestimmung des kuerzesten Weges von s nach t mit Bellman-Ford-Algorithmus
+        2. Vergroesserung des Flusses
+        3. Neuberechnung Inkrementdigraph bis vorgegebene Wert oder Maximalkapazitaet
+        des Netzwerkes N erreicht ist
+    end while
+\end{lstlisting}
+
+\lstset{caption={Bellman-Ford-Algorithmus}, language={VBScript}}
+\begin{lstlisting}
+BellmanFord(G,s)
+    for jedes v aus V                   
+        Distanz(v) := unendlich, Vorgaenger(v) := keiner
+        Distanz(s) := 0
+    end for
+    
+    while n - 1               
+        for jede Kante (u,v) in G.E
+            if Distanz(u) + Gewicht(u,v) < Distanz(v)
+            then
+              1. Distanz(v) := Distanz(u) + Gewicht(u,v)
+              2. Vorgaenger(v) := u
+            end if
+        end for
+    end while
+        
+    for jede Kante (u,v) in G.E                
+        if Distanz(u) + Gewicht(u,v) < Distanz(v)
+        then
+            STOP print "Es gibt einen Zyklus negativen Gewichtes."
+        end if
+    end for
+
+    output Distanz
+\end{lstlisting}
+
+Der Start bildet entweder ein Nullfluss oder ein gegebener Fluss. Das Ziel 
+ist das Finden eines vorgebenen bzw. maximalen Flusses, d.h. erreichen der 
+Maximalkapazität. Dies wird erreicht in dem man bei jedem Durchgang einen 
+flussvergrößernden Pfad $p$ im Inkrementnetzwerk von $s$ nach $t$ sucht, der
+unter allen $s-t-Pfaden$ die kleinsten Kosten verursacht. Der Algorithmus 
+lässt sich in 2 Schritte unterteilen. Im ersten Schritt konstruiert man einen 
+bewerteten Inkrementdigraph aus dem Netzwerk $N$ für jede gerichtete Kante $(i,j)$ aus
+$N$ mit $f_{ij} < l_{i,j}$ mit der Bewertung $c_{ij}$. Des Weiteren wir für jede 
+gerichtete Kante $(i,j)$ von $N$ mit $f_{ij} > 0$ eine umgekehrt gerichtete Kante 
+$(j,i)$ mit der Bewertung $-c_{ij}$ dem Graphen hinzugefügt. Im Anschluss 
+wird mittels eines kürzeste-Wege-Algorithmus ein $s-t-Pfad$ ermittelt, 
+welcher gleichzeitig ein flussvergrößernder und kostenminimaler Weg in $N$ 
+ist. In diesem Fall kommt der Algorithmus von $Bellman-Ford$ zum Einsatz. Dieser 
+findet für jedem Knoten $x$ einen kürzesten Weg von $s$ nach $x$ mit maximal $k$ 
+Kanten. Darausfolgt, dass ein Weg ohne Zyklen maximal $n$ Knoten und $n-1$ Kanten 
+besitzt. Ein Zyklus entsteht bei einem Weg mit negativem Weg. Der Schritt 2 wird 
+solange durchgeführt bis die vorgegebene Flussstärke erreicht oder bis keine weitere 
+Flussvergrößerung möglich ist. Für ein Inkrementnetzwerk gelten folgende Bedienungen:
 \begin{enumerate}
  \item $E(\Phi)=E^+(\Phi)\cup E^-(\Phi)$
  \item $E^+(\Phi)=\{<i,j>|<i,j> \in E,\Phi_{ij} < \kappa_{ij}\}$
  \item $E^-(\Phi)=\{<j,i>|<i,j> \in E,\Phi_{ij} > 0\}$
- \item $\kappa_{ij}(\Phi)=\biggl[\begin{array}{ll}\kappa_{ij}-\Phi_{ij} falls
+ \item $\kappa_{ij}(\Phi)=\biggl[\begin{array}{ll}\kappa_{ij}-\Phi_{ij} 
+ falls
  <i,j> \in E^+(\Phi) \\ \Phi_{ji} falls <i,j> \in E^-(\Phi) \end{array}$
  \item $c_{ij}(\Phi)=\biggl[\begin{array}{ll}c_{ij}falls<i,j> \in E^+(\Phi)
   \\ -c_{ji}falls<i,j> \in E^-(\Phi)\end{array}$
 \end{enumerate}
+\textbf{TODO: Aufzählung genauer beschreiben!?}
 
-\lstset{caption={Busacker-Gowen-Algorithmus}, language={Python}}
-\begin{lstlisting}
-Busacker-Gowen(G,s,t)
-    for jede Kante (u,v) in G.E 
-        (u,v).f = 0
-    while es existiert ein Pfad p von s nach t im Restnetzwerk G von f
-        ???
-    
-\end{lstlisting}
-
-Die Laufzeit des Algorithmus beträgt $O(m * l_\lambda * log_n)$ bzw. 
-$O(m * l^{max} * log_m)$ mit vorgebener Flussstärke $l_\lambda$ bzw. 
-Maximalkapazität $l^{max}$. \cite{kripfganz, optiv, tudortmund}
+Die Laufzeit des Algorithmus beträgt $O(|E(G)| * l_\lambda * log_{|V(G)|})$ 
+bzw. $O(|E(G)| * l^{max} * log_{|E(G)|})$ mit vorgebener Flussstärke 
+$l_\lambda$ bzw. Maximalkapazität $l^{max}$, weil \textbf{TODO: ???}. 
+\cite{kripfganz, optiv, tudortmund, bellford}

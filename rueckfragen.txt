@@ -1,10 +1,8 @@
-Beschreibung:
+﻿Beschreibung:
 - Variablen vereinheitlichen für Knoten, Kanten, etc.
-- Busacker-Gowen komplett überarbeiten
-- Pseudocode Busacker-Gowen
+
 - Komplexität genauer beschreiben
 
-- Code block - zeilennummerierung ist außerhalb des rands
 - Formatierung
 
 Quellenverzeichnis:
