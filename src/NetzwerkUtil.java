@@ -10,9 +10,9 @@ public class NetzwerkUtil {
 	public static boolean existsPfadZwischenKnoten1undKnoten2(Netzwerk netzwerk, int knoten1, int knoten2) {
 		boolean hasPfadZwischenKnoten1undKnoten2 = false;
 		
-		for(GerichteterGraph graph : netzwerk.getGerichteteGraphen()) {
-			if(graph.getKnoten1() == knoten1) {
-				if(graph.getKnoten2() == knoten2) {
+		for(GerichteteKante kante : netzwerk.getGerichteteKanten()) {
+			if(kante.getKnoten1() == knoten1) {
+				if(kante.getKnoten2() == knoten2) {
 					hasPfadZwischenKnoten1undKnoten2 = true;
 				}
 			}
@@ -26,19 +26,19 @@ public class NetzwerkUtil {
 	 * @param knoten2
 	 * @return
 	 */
-	public static FlussKapazitaetKostenWerte returnFlussKapaKostenWerte(Netzwerk netzwerk, int knoten1, int knoten2) {
-		FlussKapazitaetKostenWerte hasFlussKapaKostenWerte = null;
+	public static FlussKapazitaetKostenWerte getFlussKapaKostenWerte(Netzwerk netzwerk, int knoten1, int knoten2) {
+		FlussKapazitaetKostenWerte flussKapaKostenWerte = null;
 		
-		for(GerichteterGraph graph : netzwerk.getGerichteteGraphen()) {
-			if(graph.getKnoten1() == knoten1) {
-				if(graph.getKnoten2() == knoten2) {
-					if (graph.getFlussKapazitaetKostenWerte() != null) {					
-						hasFlussKapaKostenWerte = graph.getFlussKapazitaetKostenWerte();
+		for(GerichteteKante kante : netzwerk.getGerichteteKanten()) {
+			if(kante.getKnoten1() == knoten1) {
+				if(kante.getKnoten2() == knoten2) {
+					if (kante.getFlussKapazitaetKostenWerte() != null) {					
+						flussKapaKostenWerte = kante.getFlussKapazitaetKostenWerte();
 					}
 				}
 			}
 		}
-		return hasFlussKapaKostenWerte;
+		return flussKapaKostenWerte;
 	}
 	/**
 	 * Umwandlung Index in Knoten 
@@ -56,12 +56,11 @@ public class NetzwerkUtil {
 	public static int getMaxKnoten(Netzwerk netzwerk) {
 		int maxKnoten = 0;
 		
-		for(GerichteterGraph graph : netzwerk.getGerichteteGraphen()) {
-			if(maxKnoten < graph.getKnoten2()) {
-				maxKnoten = graph.getKnoten2();
+		for(GerichteteKante kante : netzwerk.getGerichteteKanten()) {
+			if(maxKnoten < kante.getKnoten2()) {
+				maxKnoten = kante.getKnoten2();
 			}
 		}
-		
 		return maxKnoten;
 	}
 	/**
@@ -72,7 +71,7 @@ public class NetzwerkUtil {
 	 * @return
 	 */
 	public static int getFlussZwischenKnoten1undKnoten2(Netzwerk netzwerk, int knoten1, int knoten2) {
-		return returnFlussKapaKostenWerte(netzwerk, knoten1, knoten2).getFluss();
+		return getFlussKapaKostenWerte(netzwerk, knoten1, knoten2).getFluss();
 	}
 	/**
 	 * Setzen des Flusses zwischen 2 Knoten
@@ -83,7 +82,7 @@ public class NetzwerkUtil {
 	 * @return
 	 */
 	public static void setFlussZwischenKnoten1undKnoten2(Netzwerk netzwerk, int knoten1, int knoten2, int value) {
-		returnFlussKapaKostenWerte(netzwerk, knoten1, knoten2).setFluss(value);
+		getFlussKapaKostenWerte(netzwerk, knoten1, knoten2).setFluss(value);
 	}
 	/**
 	 * Rückgabe der Kapazität zwischen 2 Knoten
@@ -93,7 +92,7 @@ public class NetzwerkUtil {
 	 * @return
 	 */
 	public static int getKapazitaetZwischenKnoten1undKnoten2(Netzwerk netzwerk, int knoten1, int knoten2) {
-		return returnFlussKapaKostenWerte(netzwerk, knoten1, knoten2).getKapazitaet();
+		return getFlussKapaKostenWerte(netzwerk, knoten1, knoten2).getKapazitaet();
 	}
 	/**
 	 * Setzen der Kapazität zwischen 2 Knoten
@@ -104,7 +103,7 @@ public class NetzwerkUtil {
 	 * @return
 	 */
 	public static void setKapazitaetZwischenKnoten1undKnoten2(Netzwerk netzwerk, int knoten1, int knoten2, int value) {
-		returnFlussKapaKostenWerte(netzwerk, knoten1, knoten2).setKapazitaet(value);
+		getFlussKapaKostenWerte(netzwerk, knoten1, knoten2).setKapazitaet(value);
 	}
 	/**
 	 * Rückgabe der Kosten zwischen 2 Knoten (read only)
@@ -114,6 +113,6 @@ public class NetzwerkUtil {
 	 * @return
 	 */
 	public static int getKostenZwischenKnoten1undKnoten2(Netzwerk netzwerk, int knoten1, int knoten2) {
-		return returnFlussKapaKostenWerte(netzwerk, knoten1, knoten2).getKosten();
+		return getFlussKapaKostenWerte(netzwerk, knoten1, knoten2).getKosten();
 	}
 }

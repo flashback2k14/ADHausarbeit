@@ -69,21 +69,21 @@ public class BusackerGowen {
 	 * 
 	 */
 	private void erstelleInkrementNetzwerk() {
-		for (GerichteterGraph graph : getNetzwerk().getGerichteteGraphen()) {
+		for (GerichteteKante kante : getNetzwerk().getGerichteteKanten()) {
 
-			int gKnoten1 = graph.getKnoten1();
-			int gKnoten2 = graph.getKnoten2();
-			int gFluss = graph.getFlussKapazitaetKostenWerte().getFluss();
-			int gKapazitaet = graph.getFlussKapazitaetKostenWerte().getKapazitaet();
-			int gKosten = graph.getFlussKapazitaetKostenWerte().getKosten();
+			int gKnoten1 = kante.getKnoten1();
+			int gKnoten2 = kante.getKnoten2();
+			int gFluss = kante.getFlussKapazitaetKostenWerte().getFluss();
+			int gKapazitaet = kante.getFlussKapazitaetKostenWerte().getKapazitaet();
+			int gKosten = kante.getFlussKapazitaetKostenWerte().getKosten();
 
 			if ((0 <= gFluss) && (gFluss <= gKosten)) {
 				if ((gFluss != 0) && ((gFluss - gKosten) != 0)) {
-					inkrementNetzwerk.addGerichtetenGraph(new GerichteterGraph(
+					inkrementNetzwerk.addGerichteteKante(new GerichteteKante(
 							gKnoten1, gKnoten2, new FlussKapazitaetKostenWerte(
 									-gFluss, gKapazitaet, gKosten)));
 					
-					inkrementNetzwerk.addGerichtetenGraph(new GerichteterGraph(
+					inkrementNetzwerk.addGerichteteKante(new GerichteteKante(
 							gKnoten2, gKnoten1, new FlussKapazitaetKostenWerte(
 									gFluss, gKapazitaet, gKosten)));
 				}

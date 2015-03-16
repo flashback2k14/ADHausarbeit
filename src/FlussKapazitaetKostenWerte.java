@@ -53,7 +53,10 @@ public class FlussKapazitaetKostenWerte {
 	public void setKosten(int kosten) {
 		this.kosten = kosten;
 	}
-	
+	/**
+	 * Ausgabe der Werte von Fluss, Kapazität und Kosten
+	 * @return
+	 */
 	public String printFlussKapazitaetKostenWerte() {
 		return getFluss() + "/" + getKapazitaet() + "/" + getKosten();
 	}

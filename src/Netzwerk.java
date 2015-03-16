@@ -8,7 +8,7 @@ public class Netzwerk {
 	private int quelle;
 	private int senke;
 	private int maxFlussstaerke;
-	private ArrayList<GerichteterGraph> gerichteteGraphen;
+	private ArrayList<GerichteteKante> gerichteteKanten;
 	/**
 	 * Konstruktor
 	 */
@@ -16,7 +16,7 @@ public class Netzwerk {
 		this.quelle = 0;
 		this.senke = 0;
 		this.maxFlussstaerke = 0;
-		this.gerichteteGraphen = new ArrayList<GerichteterGraph>();
+		this.gerichteteKanten = new ArrayList<GerichteteKante>();
 	}	
 	/**
 	 * Getter / Setter
@@ -45,18 +45,18 @@ public class Netzwerk {
 		this.maxFlussstaerke = maxFlussstaerke;
 	}
 
-	public ArrayList<GerichteterGraph> getGerichteteGraphen() {
-		return gerichteteGraphen;
+	public ArrayList<GerichteteKante> getGerichteteKanten() {
+		return gerichteteKanten;
 	}
 
-	public void setGerichteteGraphen(ArrayList<GerichteterGraph> gerichteteGraphen) {
-		this.gerichteteGraphen = gerichteteGraphen;
+	public void setGerichteteKanten(ArrayList<GerichteteKante> gerichteteKanten) {
+		this.gerichteteKanten = gerichteteKanten;
 	}
 	/**
 	 * hinzufügen eines Graphen zum Netzwerk
 	 */
-	public void addGerichtetenGraph(GerichteterGraph gerichteterGraph) {
-		this.gerichteteGraphen.add(gerichteterGraph);
+	public void addGerichteteKante(GerichteteKante gerichteteKante) {
+		this.gerichteteKanten.add(gerichteteKante);
 	}
 	/**
 	 * Ausgabe aller Graphen ohne Flussstärke
@@ -69,7 +69,7 @@ public class Netzwerk {
 		for(int i = 0; i < maxKnoten; i++) {
 			for(int j = 0; j < maxKnoten; j++) {
 				
-				FlussKapazitaetKostenWerte tmp = NetzwerkUtil.returnFlussKapaKostenWerte(this, (i + 1), (j + 1));
+				FlussKapazitaetKostenWerte tmp = NetzwerkUtil.getFlussKapaKostenWerte(this, (i + 1), (j + 1));
 				
 				if(tmp != null ) {
 					sb.append("<" + (i + 1) + "," + (j + 1) + "," + tmp.printFlussKapazitaetKostenWerte() + ">");	

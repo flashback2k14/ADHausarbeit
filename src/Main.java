@@ -49,8 +49,8 @@ public class Main {
 			 * gerichtete Graphen zum Netzwerk hinzu
 			 */
 			for (Integer[] graph : netzwerkData) {
-				GerichteterGraph gerichteterGraph = new GerichteterGraph(graph[0], graph[1], new FlussKapazitaetKostenWerte(graph[2], graph[3]));
-				netzwerk.addGerichtetenGraph(gerichteterGraph);
+				GerichteteKante gerichteteKante = new GerichteteKante(graph[0], graph[1], new FlussKapazitaetKostenWerte(graph[2], graph[3]));
+				netzwerk.addGerichteteKante(gerichteteKante);
 			}
 			/**
 			 * ToDo
