@@ -1,16 +1,25 @@
 
 public class GerichteterGraph {
-
+	/**
+	 * Attribute
+	 */
 	private int knoten1;
 	private int knoten2;
 	private FlussKapazitaetKostenWerte flussKapazitaetKostenWerte;
-	
+	/**
+	 * Konstruktor
+	 * @param knoten1
+	 * @param knoten2
+	 * @param flkako
+	 */
 	public GerichteterGraph(int knoten1, int knoten2, FlussKapazitaetKostenWerte flkako) {
 		this.knoten1 = knoten1;
 		this.knoten2 = knoten2;
 		this.flussKapazitaetKostenWerte = flkako;
 	}
-
+	/**
+	 * Getter / Setter
+	 */
 	public int getKnoten1() {
 		return knoten1;
 	}
@@ -33,20 +42,24 @@ public class GerichteterGraph {
 
 	public void setFlussKapazitaetKostenWerte(FlussKapazitaetKostenWerte flkako) {
 		this.flussKapazitaetKostenWerte = flkako;
-	}
-	
-	public void printInitGerichtetenGraph() {
-		System.out.println("<" + getKnoten1() 
-				+ "," + getKnoten2() 
-				+ "," + getFlussKapazitaetKostenWerte().getKapazitaet()
-				+ "," + getFlussKapazitaetKostenWerte().getKosten() + ">");
-	}
-	
-	public void printGerichtetenGraph() {
-		System.out.println("<" + getKnoten1() 
-							+ "," + getKnoten2() 
-							+ "," + getFlussKapazitaetKostenWerte().getFluss()
-							+ "," + getFlussKapazitaetKostenWerte().getKapazitaet()
-							+ "," + getFlussKapazitaetKostenWerte().getKosten() + ">");
-	}
+	}	
+	/**
+	 * Ausgabe Graph ohne Flussstärke
+	 */
+//	public void printInitGerichtetenGraph() {
+//		System.out.println("<" + getKnoten1() 
+//				+ "," + getKnoten2() 
+//				+ "," + getFlussKapazitaetKostenWerte().getKapazitaet()
+//				+ "," + getFlussKapazitaetKostenWerte().getKosten() + ">");
+//	}
+	/**
+	 * Ausgabe Graph mit Flussstärke
+	 */
+//	public void printGerichtetenGraph() {
+//		System.out.println("<" + getKnoten1() 
+//				+ "," + getKnoten2() 
+//				+ "," + getFlussKapazitaetKostenWerte().getFluss()
+//				+ "," + getFlussKapazitaetKostenWerte().getKapazitaet()
+//				+ "," + getFlussKapazitaetKostenWerte().getKosten() + ">");
+//	}
 }

@@ -1,22 +1,35 @@
 
 public class FlussKapazitaetKostenWerte {
-
+	/**
+	 * Attribute
+	 */
 	private int fluss;
 	private int kapazitaet;
 	private int kosten;
-	
+	/**
+	 * Konstruktor
+	 * @param fluss
+	 * @param kapazitaet
+	 * @param kosten
+	 */
 	public FlussKapazitaetKostenWerte(int fluss, int kapazitaet, int kosten) {
 		this.fluss = fluss;
 		this.kapazitaet = kapazitaet;
 		this.kosten = kosten;
 	}
-	
+	/**
+	 * Konstruktor
+	 * @param kapazitaet
+	 * @param kosten
+	 */
 	public FlussKapazitaetKostenWerte(int kapazitaet, int kosten) {
 		this.fluss = 0;
 		this.kapazitaet = kapazitaet;
 		this.kosten = kosten;
 	}
-
+	/**
+	 * Getter / Setter
+	 */
 	public int getFluss() {
 		return fluss;
 	}
@@ -39,5 +52,9 @@ public class FlussKapazitaetKostenWerte {
 
 	public void setKosten(int kosten) {
 		this.kosten = kosten;
-	}	
+	}
+	
+	public String printFlussKapazitaetKostenWerte() {
+		return getFluss() + "/" + getKapazitaet() + "/" + getKosten();
+	}
 }

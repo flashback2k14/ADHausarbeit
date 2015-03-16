@@ -3,53 +3,67 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-
-		String path = "";
-		int quelle = 0;
-		int senke = 0;
-		int maxFlussstaerke = 0;		
-		
-		ArrayList<Integer[]> netzwerk = new ArrayList<Integer[]>();
-		ArrayList<GerichteterGraph> gerichteteGraphen = new ArrayList<GerichteterGraph>();
-
+		/**
+		 * Attribute
+		 */
+		String path = "";		
+		ArrayList<Integer[]> netzwerkData = new ArrayList<Integer[]>();
+		Netzwerk netzwerk = new Netzwerk();
+		/**
+		 * Einlesen der Daten
+		 * Setzen der Netzwerkdaten
+		 */
 		if (args[0].equals("1")) {
 			path = "src/Daten12B.txt";
-			netzwerk = Util.readFile(path);
-			
-			quelle = 4;
-			senke = 16;
-			maxFlussstaerke = 6;
+			netzwerkData = Util.readFile(path);
+			netzwerk.setQuelle(4);
+			netzwerk.setSenke(16);
+			netzwerk.setMaxFlussstaerke(6);
 			
 		} else if (args[0].equals("2")) {
 			path = "src/Uebung62.txt";
-			netzwerk = Util.readFile(path);
-			
-			quelle = 1;
-			senke = 6;
-			maxFlussstaerke = 19;
+			netzwerkData = Util.readFile(path);
+			netzwerk.setQuelle(1);
+			netzwerk.setSenke(6);
+			netzwerk.setMaxFlussstaerke(19);
 			
 		} else {
-			path = args[0];
-			netzwerk = Util.readFile(path);
-			
 			try {
-				quelle = Integer.valueOf(args[1]);
-				senke = Integer.valueOf(args[2]);
-				maxFlussstaerke = Integer.valueOf(args[3]);
-			} catch (NumberFormatException nfe) {
-				System.out.println("Error: " + nfe.getMessage());
+				path = args[0];
+				netzwerkData = Util.readFile(path);
+				netzwerk.setQuelle(Integer.valueOf(args[1]));
+				netzwerk.setSenke(Integer.valueOf(args[2]));
+				netzwerk.setMaxFlussstaerke(Integer.valueOf(args[3]));
+			} catch (Exception e) {
+				System.out.println("Error: " + e.getMessage());
 			}
 		}
-		
-		if (netzwerk != null) {
-			for (Integer[] graph : netzwerk) {
+		/**
+		 * Wenn Netzwerkdaten ungleich null, dann füge
+		 * - gerichtete Graphen zum Netzwerk hinzu 
+		 * - Algorithmus starten
+		 * - Ausgabe des Ergebnisses
+		 */
+		if (netzwerkData != null) {
+			/**
+			 * gerichtete Graphen zum Netzwerk hinzu
+			 */
+			for (Integer[] graph : netzwerkData) {
 				GerichteterGraph gerichteterGraph = new GerichteterGraph(graph[0], graph[1], new FlussKapazitaetKostenWerte(graph[2], graph[3]));
-				gerichteteGraphen.add(gerichteterGraph);
+				netzwerk.addGerichtetenGraph(gerichteterGraph);
 			}
-			
-			BusackerGowen busackerGowen = new BusackerGowen(quelle, senke, maxFlussstaerke, gerichteteGraphen);
+			/**
+			 * ToDo
+			 * Algorithmus starten
+			 */
+			BusackerGowen busackerGowen = new BusackerGowen(netzwerk);
 			busackerGowen.printInitStatus();
 			busackerGowen.starteAlgorithmus();
+			/**
+			 * ToDo
+			 * Ausgabe des Ergebnisses
+			 */
+			
 		}
 	}
 }

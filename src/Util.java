@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Util {
 	/**
-	 * 
+	 * Einlesen der Daten und Rückgabe der Daten
 	 * @param path
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public class Util {
 		}
 	}
 	/**
-	 * 
+	 * Zerlege Datenzeile in einzelne Bestandteile
 	 * @param line
 	 * @return
 	 */
