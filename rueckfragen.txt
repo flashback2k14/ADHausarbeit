@@ -1,6 +1,5 @@
-﻿Beschreibung:
+Beschreibung:
 - Variablen vereinheitlichen für Knoten, Kanten, etc.
-
 - Komplexität genauer beschreiben
 
 - Formatierung

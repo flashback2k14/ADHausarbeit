@@ -30,7 +30,7 @@ gesucht auf dem alle Kanten positive Kapazitäten besitzen. Im nächsten
 Schritt wird der Fluss um die kleinste Kapazität auf diesem Pfad $p$
 erhöht. Dieser Vorgang erfolgt solange bis kein Pfad im Netzwerk $N$ mit 
 positiven Kanten existiert. Die Laufzeit beträgt $O(|V(G)| + |E(G)|)$ ,
-weil \textbf{TODO: ???}. \cite{algo, optiv}\\
+\textbf{TODO: weil???}. \cite{algo, optiv}\\
 
 Im Gegenteil dazu implementiert der Algorithmus von $Edmonds-Karp$ zur 
 Berechnung des Pfads $p$ eine Breitensuche. 
@@ -52,7 +52,7 @@ EdmondsKarp(G,s,t)
 Die Breitensuche wählt für den 
 Pfad $p$ einen kürzesten Pfad von $s$ nach $t$ aus, wobei jede Kante das 
 Gewicht / Distanz 1 erhält. Daraus folgt eine Laufzeitverbesserung auf 
-$O(|V(G)| + |E(G)|^2)$, weil \textbf{TODO: ???}. \cite{algo, optiv, edmkarp} Der 
+$O(|V(G)| + |E(G)|^2)$,\textbf{TODO: weil???}. \cite{algo, optiv, edmkarp} Der 
 $Busacker-Gowen-Algorithmus$ verfolgt die Idee einen kostenminimalen 
 Fluss von $s$ nach $t$ zu konstruieren. 
 
@@ -127,9 +127,23 @@ Flussvergrößerung möglich ist. Für ein Inkrementnetzwerk gelten folgende Bed
  \item $c_{ij}(\Phi)=\biggl[\begin{array}{ll}c_{ij}falls<i,j> \in E^+(\Phi)
   \\ -c_{ji}falls<i,j> \in E^-(\Phi)\end{array}$
 \end{enumerate}
-\textbf{TODO: Aufzählung genauer beschreiben!?}
-
-Die Laufzeit des Algorithmus beträgt $O(|E(G)| * l_\lambda * log_{|V(G)|})$ 
-bzw. $O(|E(G)| * l^{max} * log_{|E(G)|})$ mit vorgebener Flussstärke 
-$l_\lambda$ bzw. Maximalkapazität $l^{max}$, weil \textbf{TODO: ???}. 
-\cite{kripfganz, optiv, tudortmund, bellford}
+Der erste Punkte besagt, dass die Menge aller Kanten im Fluss $\Phi$ gleich der Menge
+der Kanten von $s$ nach $t$ vereinigt mit der Menge der Kanten von $t$ nach $s$ ist.
+Die Kante von $s$ nach $t$ im Fluss $\Phi$ wird gebildet mit der Kante von Knoten $i$
+nach Knoten $j$, wenn Knoten $i$ und Knoten $j$ in der Menge aller Kanten und der 
+Fluss von $i$ nach $j$ kleiner der Kapazität von $i$ nach $j$ ist. Die Kante von $t$
+nach $s$ wird gebildet mit der Kante von Knoten $j$ nach Knoten $i$, wenn Knoten $i$
+und Knoten $j$ in der Menge aller Kanten und Fluss von $i$ nach $j$ größer als 0 ist.
+Die Kapazität von $i$ nach $j$ im Fluss berechnet sich aus der Kapazität $\kappa$
+von $i$ nach $j$ Minus dem Fluss von $i$ nach $j$, wenn die Kante von Knoten $i$ nach
+Knoten $j$ in der Kantenmenge von $s$ nach $t$ im Fluss $\Phi$ liegen, ansonsten wird
+der Fluss von Knoten $j$ nach Knoten $i$ als Kapazität $\kappa$ genommen, wenn die 
+Kante von Knoten $i$ nach Knoten $j$ in der Menge der Kanten von $t$ nach $s$ im 
+Fluss liegen. Die Kosten $c$ von $i$ nach $j$ im Fluss $\Phi$ sind entweder die
+Kosten von $i$ nach $j$ falls die Kante von Knoten $i$ nach $j$ in Menge der Kanten
+von $s$ nach $t$ im Fluss liegen, ansonsten werden die negative Kosten $c$ von $j$ 
+nach $i$ genommen, falls die Kante von Knoten $i$ nach Knoten $j$ in der Menge der
+Kanten von $t$ nach $s$ im Fluss $\Phi$ liegen. Die Laufzeit des Algorithmus beträgt
+$O(|E(G)| * l_\lambda * log_{|V(G)|})$ bzw. $O(|E(G)| * l^{max} * log_{|E(G)|})$ 
+mit vorgebener Flussstärke $l_\lambda$ bzw. Maximalkapazität $l^{max}$,
+\textbf{TODO: weil???}. \cite{kripfganz, optiv, tudortmund, bellford}
