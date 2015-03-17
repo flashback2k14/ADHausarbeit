@@ -1,3 +1,4 @@
+package kante;
 
 public class FlussKapazitaetKostenWerte {
 	/**

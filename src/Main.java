@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+import kante.FlussKapazitaetKostenWerte;
+import kante.GerichteteKante;
+import algorithmus.BusackerGowen;
+import netzwerk.Netzwerk;
+import utilities.Util;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -14,14 +20,14 @@ public class Main {
 		 * Setzen der Netzwerkdaten
 		 */
 		if (args[0].equals("1")) {
-			path = "src/Daten12B.txt";
+			path = "src/daten/Daten12B.txt";
 			netzwerkData = Util.readFile(path);
 			netzwerk.setQuelle(4);
 			netzwerk.setSenke(16);
 			netzwerk.setMaxFlussstaerke(6);
 			
 		} else if (args[0].equals("2")) {
-			path = "src/Uebung62.txt";
+			path = "src/daten/Uebung62.txt";
 			netzwerkData = Util.readFile(path);
 			netzwerk.setQuelle(1);
 			netzwerk.setSenke(6);

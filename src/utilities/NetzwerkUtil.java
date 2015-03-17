@@ -1,3 +1,9 @@
+package utilities;
+
+import kante.FlussKapazitaetKostenWerte;
+import kante.GerichteteKante;
+import netzwerk.Netzwerk;
+
 
 public class NetzwerkUtil {
 	/**

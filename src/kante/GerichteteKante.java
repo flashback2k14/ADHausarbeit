@@ -1,5 +1,6 @@
+package kante;
 
-public class GerichteterGraph {
+public class GerichteteKante {
 	/**
 	 * Attribute
 	 */
@@ -12,7 +13,7 @@ public class GerichteterGraph {
 	 * @param knoten2
 	 * @param flkako
 	 */
-	public GerichteterGraph(int knoten1, int knoten2, FlussKapazitaetKostenWerte flkako) {
+	public GerichteteKante(int knoten1, int knoten2, FlussKapazitaetKostenWerte flkako) {
 		this.knoten1 = knoten1;
 		this.knoten2 = knoten2;
 		this.flussKapazitaetKostenWerte = flkako;
