@@ -1,134 +1,87 @@
 package netzwerk;
-import java.util.ArrayList;
+import java.util.Map;
 
-import kante.FlussKapazitaetKostenWerte;
-import kante.GerichteteKante;
-import utilities.NetzwerkUtil;
+import kanten.GerichteteKante;
+import knoten.Knoten;
 
+import org.apache.commons.collections15.map.HashedMap;
 
+import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 
-public class Netzwerk {
+/**
+ * Klasse Netzwerk
+ * abgeleitet von Klasse DirectedSparseMultigraph des Frameworks von JUNG 
+ */
+public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante>{
 	/**
 	 * Attribute
 	 */
-	private int quelle;
-	private int senke;
-	private int maxFlussstaerke;
-	private ArrayList<GerichteteKante> gerichteteKanten;
-
+	private static final long serialVersionUID = 1L;
+	private Map<Integer, Knoten> idKnotenMap = new HashedMap<Integer, Knoten>();
 	/**
 	 * Konstruktor
 	 */
 	public Netzwerk() {
-		this.quelle = 0;
-		this.senke = 0;
-		this.maxFlussstaerke = 0;
-		this.gerichteteKanten = new ArrayList<GerichteteKante>();
+		super();
 	}
-
 	/**
-	 * Getter / Setter
+	 * Überschreiben der Standardmethode zum Hinzufügen von Knoten
+	 * Prüfung, ob Knoten bereits enthalten
 	 */
-	public int getQuelle() {
-		return quelle;
-	}
-
-	public void setQuelle(int quelle) {
-		this.quelle = quelle;
-	}
-
-	public int getSenke() {
-		return senke;
-	}
-
-	public void setSenke(int senke) {
-		this.senke = senke;
-	}
-
-	public int getMaxFlussstaerke() {
-		return maxFlussstaerke;
-	}
-
-	public void setMaxFlussstaerke(int maxFlussstaerke) {
-		this.maxFlussstaerke = maxFlussstaerke;
-	}
-
-	public ArrayList<GerichteteKante> getGerichteteKanten() {
-		return gerichteteKanten;
-	}
-
-	public void setGerichteteKanten(ArrayList<GerichteteKante> gerichteteKanten) {
-		this.gerichteteKanten = gerichteteKanten;
-	}
-
-	/**
-	 * hinzufügen einer Kante zum Netzwerk
-	 */
-	public void addGerichteteKante(GerichteteKante gerichteteKante) {
-		this.gerichteteKanten.add(gerichteteKante);
-	}
-
-	/**
-	 * Ausgabe aller Kanten
-	 */
-	public void printNetzwerk() {
-
-		StringBuilder sb = new StringBuilder();
-		int maxKnoten = NetzwerkUtil.getMaxKnoten(this);
-
-		for (int i = 0; i < maxKnoten; i++) {
-			for (int j = 0; j < maxKnoten; j++) {
-
-				int knotenI = NetzwerkUtil.getKnoten(i);
-				int knotenJ = NetzwerkUtil.getKnoten(j);
-								
-				FlussKapazitaetKostenWerte tmp = NetzwerkUtil.getFlussKapaKostenWerte(this,knotenI,knotenJ);
-
-				if (tmp != null) {
-					sb.append("<" + knotenI + "," + knotenJ + "," + tmp.printFlussKapazitaetKostenWerte() + ">");
-				} else {
-					sb.append("<" + knotenI + "," + knotenJ + ",-/-/-" + ">");
-				}
-				sb.append("\t");
-			}
-			sb.append("\n");
+	@Override
+	public boolean addVertex(Knoten vertex) {
+		boolean result = super.addVertex(vertex);
+		if (result && idKnotenMap.containsKey(vertex.getId()) == false) {
+			idKnotenMap.put(vertex.getId(), vertex);
 		}
-		System.out.println(sb.toString());
-	}
-	
-	public void printNetzwerkOhneNullwerte() {
-
-		StringBuilder sb = new StringBuilder();
-		int maxKnoten = NetzwerkUtil.getMaxKnoten(this);
-
-		for (int i = 0; i < maxKnoten; i++) {
-			for (int j = 0; j < maxKnoten; j++) {
-
-				int knotenI = NetzwerkUtil.getKnoten(i);
-				int knotenJ = NetzwerkUtil.getKnoten(j);
-								
-				if (NetzwerkUtil.existsPfadZwischenKnoten1undKnoten2(this,knotenI,knotenJ)) 
-				{
-					FlussKapazitaetKostenWerte tmp = NetzwerkUtil.getFlussKapaKostenWerte(this,knotenI,knotenJ);
-
-					if (tmp != null) {
-						sb.append("<" + knotenI + "," + knotenJ + "," + tmp.printFlussKapazitaetKostenWerte() + ">");
-					} else {
-						sb.append("<" + knotenI + "," + knotenJ + ",-/-/-" + ">");
-					}
-					sb.append("\t");
-				}
-			}
-			sb.append("\n");
-		}
-		System.out.println(sb.toString());
+		return result;
 	}
 	/**
-	 * Ausgabe aller Graphen mit Flussstärke
+	 * Überschreiben der Standardmethode zum Löschen von Knoten
+	 * Prüfung, ob Knoten bereits enthalten
 	 */
-	// public void printNetzwerk() {
-	// for(GerichteterGraph graph : getGerichteteGraphen()) {
-	// graph.printGerichtetenGraph();
-	// }
-	// }
+	@Override
+	public boolean removeVertex(Knoten knoten) {
+		boolean result = super.removeVertex(knoten);
+		if (result) {
+			idKnotenMap.remove(knoten.getId());
+		}
+		return result;
+	}
+	/**
+	 * Rückgabe des Knotens mit übergebener ID
+	 * @param id
+	 * @return
+	 */
+	public Knoten getVertexById(Integer id) {
+		return idKnotenMap.get(id);
+	}
+	/**
+	 * Rückgabe des Flusses
+	 * @return
+	 */
+	public int getFluss() {
+		int fluss = 0;
+		Knoten quelle = null;
+		for (Knoten knoten : this.getVertices()) {
+			if (knoten.isQuelle()) {
+				quelle = knoten;
+			}
+		}
+		for (GerichteteKante outKante : this.getOutEdges(quelle)) {
+			fluss  += outKante.getFluss();
+		}
+		return fluss;
+	}
+	/**
+	 * Rückgabe der Flusskosten	
+	 * @return
+	 */
+	public int getFlussKosten() {
+		int kosten = 0;
+		for (GerichteteKante kante : this.getEdges()) {
+			kosten += kante.getFluss() * kante.getKosten();
+		}
+		return kosten;
+	}
 }

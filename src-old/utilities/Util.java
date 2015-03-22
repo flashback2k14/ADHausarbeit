@@ -1,49 +1,47 @@
 package utilities;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 public class Util {
 	/**
-	 * 
+	 * Einlesen der Daten und Rückgabe der Daten
 	 * @param path
 	 * @return
 	 */
-	public static ArrayList<int[]> readFile(String path) {
+	public static ArrayList<Integer[]> readFile(String path) {
 		File file = new File(path);
 		try {
-			ArrayList<int[]> blubb = new ArrayList<>();
+			ArrayList<Integer[]> netzwerk = new ArrayList<>();
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			try {
 				String line = bufferedReader.readLine();
 				while (line != null) {				
-					blubb.add(cutLineIntoPieces(line));					
+					netzwerk.add(cutGraphDataIntoPieces(line));					
 					line = bufferedReader.readLine();
 				}
-				return blubb;
+				return netzwerk;
 			} finally {
 				if (bufferedReader != null) {
 					bufferedReader.close();
 				}
 			}
 		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, ioe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Error: " + ioe.getMessage());
 			return null;
 		}
 	}
 	/**
-	 * 
+	 * Zerlege Datenzeile in einzelne Bestandteile
 	 * @param line
 	 * @return
 	 */
-	private static int[] cutLineIntoPieces(String line) {
-		int[] linePieces = new int[4];
+	private static Integer[] cutGraphDataIntoPieces(String line) {
+		Integer[] linePieces = new Integer[4];
 		String[] tmp = line.split("\t");
 		
 		try {
@@ -51,7 +49,7 @@ public class Util {
 				linePieces[i] = Integer.parseInt(tmp[i]);
 			}
 		} catch (NumberFormatException nfe) {
-			JOptionPane.showMessageDialog(null, nfe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			System.out.println("Error: " + nfe.getMessage());
 		}
 			
 		return linePieces;
