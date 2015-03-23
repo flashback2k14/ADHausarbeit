@@ -1,4 +1,5 @@
 package netzwerk;
+
 import java.util.Map;
 
 import kanten.GerichteteKante;
@@ -9,24 +10,26 @@ import org.apache.commons.collections15.map.HashedMap;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 
 /**
- * Klasse Netzwerk
- * abgeleitet von Klasse DirectedSparseMultigraph des Frameworks von JUNG 
+ * Klasse Netzwerk abgeleitet von Klasse DirectedSparseMultigraph des Frameworks
+ * von JUNG
  */
-public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante>{
+public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante> {
 	/**
 	 * Attribute
 	 */
 	private static final long serialVersionUID = 1L;
 	private Map<Integer, Knoten> idKnotenMap = new HashedMap<Integer, Knoten>();
+
 	/**
 	 * Konstruktor
 	 */
 	public Netzwerk() {
 		super();
 	}
+
 	/**
-	 * Überschreiben der Standardmethode zum Hinzufügen von Knoten
-	 * Prüfung, ob Knoten bereits enthalten
+	 * Überschreiben der Standardmethode zum Hinzufügen von Knoten Prüfung, ob
+	 * Knoten bereits enthalten
 	 */
 	@Override
 	public boolean addVertex(Knoten vertex) {
@@ -36,9 +39,10 @@ public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante>{
 		}
 		return result;
 	}
+
 	/**
-	 * Überschreiben der Standardmethode zum Löschen von Knoten
-	 * Prüfung, ob Knoten bereits enthalten
+	 * Überschreiben der Standardmethode zum Löschen von Knoten Prüfung, ob
+	 * Knoten bereits enthalten
 	 */
 	@Override
 	public boolean removeVertex(Knoten knoten) {
@@ -48,16 +52,20 @@ public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante>{
 		}
 		return result;
 	}
+
 	/**
 	 * Rückgabe des Knotens mit übergebener ID
+	 * 
 	 * @param id
 	 * @return
 	 */
 	public Knoten getVertexById(Integer id) {
 		return idKnotenMap.get(id);
 	}
+
 	/**
 	 * Rückgabe des Flusses
+	 * 
 	 * @return
 	 */
 	public int getFluss() {
@@ -69,12 +77,14 @@ public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante>{
 			}
 		}
 		for (GerichteteKante outKante : this.getOutEdges(quelle)) {
-			fluss  += outKante.getFluss();
+			fluss += outKante.getFluss();
 		}
 		return fluss;
 	}
+
 	/**
-	 * Rückgabe der Flusskosten	
+	 * Rückgabe der Flusskosten
+	 * 
 	 * @return
 	 */
 	public int getFlussKosten() {

@@ -1,4 +1,5 @@
 package wege;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -14,32 +15,38 @@ public class ErweiterbarerWeg {
 	 */
 	private List<Knoten> knotenListe = new ArrayList<Knoten>();
 	private List<GerichteteKante> kantenListe = null;
+
 	/**
 	 * hinzufügen eines Knotens zur Knotenliste
+	 * 
 	 * @param knoten
 	 */
 	public void addKnoten(Knoten knoten) {
 		knotenListe.add(knoten);
 	}
+
 	/**
 	 * Erstelle Kantenliste aus Inkrementnetzwerk
+	 * 
 	 * @param inkrementNetzwerk
 	 */
 	private void erstelleKantenListe(Netzwerk inkrementNetzwerk) {
 		if (kantenListe == null) {
 			kantenListe = new ArrayList<GerichteteKante>();
-			Iterator<Knoten> iterator = knotenListe.iterator(); 
+			Iterator<Knoten> iterator = knotenListe.iterator();
 			Knoten currentKnoten = iterator.next();
 			while (iterator.hasNext()) {
-				Collection<GerichteteKante> outKanten = inkrementNetzwerk.getOutEdges(currentKnoten);
+				Collection<GerichteteKante> outKanten = inkrementNetzwerk
+						.getOutEdges(currentKnoten);
 				Knoten nextKnoten = iterator.next();
-				GerichteteKante candidateKante =  null;
+				GerichteteKante candidateKante = null;
 				for (GerichteteKante gerichteteKante : outKanten) {
 					if (inkrementNetzwerk.getDest(gerichteteKante) == nextKnoten) {
 						if (candidateKante == null) {
 							candidateKante = gerichteteKante;
 						} else {
-							if (candidateKante.getKosten() > gerichteteKante.getKosten()) {
+							if (candidateKante.getKosten() > gerichteteKante
+									.getKosten()) {
 								candidateKante = gerichteteKante;
 							}
 						}
@@ -52,8 +59,10 @@ public class ErweiterbarerWeg {
 			}
 		}
 	}
+
 	/**
 	 * Rückgabe der Minimalen Kapazität des Inkrementnetzwerks
+	 * 
 	 * @param inkrementNetzwerk
 	 * @return
 	 */
@@ -61,16 +70,18 @@ public class ErweiterbarerWeg {
 		if (kantenListe == null) {
 			erstelleKantenListe(inkrementNetzwerk);
 		}
-		
+
 		Integer minKap = Integer.MAX_VALUE;
-		
+
 		for (GerichteteKante kante : kantenListe) {
 			minKap = Math.min(minKap, kante.getKapzitaet());
 		}
 		return minKap;
 	}
+
 	/**
 	 * Rückgabe der Kantenliste des Inkrementnetzwerks
+	 * 
 	 * @param inkrementNetzwerk
 	 * @return
 	 */
@@ -80,8 +91,10 @@ public class ErweiterbarerWeg {
 		}
 		return kantenListe;
 	}
+
 	/**
 	 * Prüfung, ob Knotenliste leer ist
+	 * 
 	 * @return
 	 */
 	public boolean isEmpty() {
@@ -92,6 +105,7 @@ public class ErweiterbarerWeg {
 		}
 		return true;
 	}
+
 	/**
 	 * Ausgabe des Erweiterbaren Weges
 	 */

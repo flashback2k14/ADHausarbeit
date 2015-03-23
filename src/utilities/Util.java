@@ -6,10 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class Util {
 	/**
 	 * Einlesen der Daten und Rückgabe der Daten
+	 * 
 	 * @param path
 	 * @return
 	 */
@@ -21,8 +21,8 @@ public class Util {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			try {
 				String line = bufferedReader.readLine();
-				while (line != null) {				
-					netzwerk.add(cutGraphDataIntoPieces(line));					
+				while (line != null) {
+					netzwerk.add(cutGraphDataIntoPieces(line));
 					line = bufferedReader.readLine();
 				}
 				return netzwerk;
@@ -36,23 +36,25 @@ public class Util {
 			return null;
 		}
 	}
+
 	/**
 	 * Zerlege Datenzeile in einzelne Bestandteile
+	 * 
 	 * @param line
 	 * @return
 	 */
 	private static Integer[] cutGraphDataIntoPieces(String line) {
 		Integer[] linePieces = new Integer[4];
 		String[] tmp = line.split("\t");
-		
+
 		try {
-			for(int i = 0; i < tmp.length; i++) {
+			for (int i = 0; i < tmp.length; i++) {
 				linePieces[i] = Integer.parseInt(tmp[i]);
 			}
 		} catch (NumberFormatException nfe) {
 			System.out.println("Error: " + nfe.getMessage());
 		}
-			
+
 		return linePieces;
 	}
 }

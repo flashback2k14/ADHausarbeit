@@ -25,13 +25,33 @@ public class Main {
 		Netzwerk netzwerk = new Netzwerk();
 		ErweiterbarerWeg weg = null;
 		/**
-		 * Setzen der Netzwerkdaten
+		 * Setzen der Netzwerkdaten anhand der Nutzerauswahl
 		 */
-		path = "src/daten/Daten12B.txt";
-		netzwerkData = Util.readFile(path);
-		quelle = 4;
-		senke = 16;
-		maxFlussstaerke = 6;
+		if ("1".equals(args[0])) {
+			path = "src/daten/Daten12B.txt";
+			netzwerkData = Util.readFile(path);
+			quelle = 4;
+			senke = 16;
+			maxFlussstaerke = 6;
+		} else if ("2".equals(args[0])) {
+			path = "src/daten/Uebung62.txt";
+			netzwerkData = Util.readFile(path);
+			quelle = 1;
+			senke = 6;
+			maxFlussstaerke = 19;
+		} else {
+			try {
+				path = args[0];
+				netzwerkData = Util.readFile(path);
+				quelle = Integer.valueOf(args[1]);
+				senke = Integer.valueOf(args[2]);
+				maxFlussstaerke = Integer.valueOf(args[3]);
+			} catch (Exception e) {
+				System.out
+						.println("Etwas ist schief gegangen. Bitte Eingabe prüfen und wiederholen.");
+			}
+		}
+
 		/**
 		 * Erstellung des Netzwerks aus übergebener Datendatei
 		 */
@@ -48,7 +68,8 @@ public class Main {
 				netzwerk.addVertex(knoten2);
 			}
 
-			GerichteteKante kante = new GerichteteKante(kantenDaten[3], kantenDaten[2], 0);
+			GerichteteKante kante = new GerichteteKante(kantenDaten[3],
+					kantenDaten[2], 0);
 			netzwerk.addEdge(kante, knoten1, knoten2);
 		}
 		/**
@@ -59,27 +80,32 @@ public class Main {
 		/**
 		 * Ausgabe der Initialdaten
 		 */
-		System.out.println("----------------------------------------------------------");
+		System.out
+				.println("----------------------------------------------------------");
 		System.out.println("Kostenminimale Flüsse im Netzwerk");
-		System.out.println("----------------------------------------------------------");
+		System.out
+				.println("----------------------------------------------------------");
 		System.out.println("Quelle ist Knoten: " + quelle);
 		System.out.println("Senke ist Knoten: " + senke);
 		System.out.println("Flussstärke: " + maxFlussstaerke);
-		System.out.println("----------------------------------------------------------");
+		System.out
+				.println("----------------------------------------------------------");
 		/**
 		 * Iteratorbeginn
 		 */
 		int i = 1;
 		/**
-		 * Ausführung des Algorithmus zum Finden von kostenminimalen Flüssen in einem Netzwerk
+		 * Ausführung des Algorithmus zum Finden von kostenminimalen Flüssen in
+		 * einem Netzwerk
 		 */
-		do {	
+		do {
 			/**
 			 * Schrittweise Abarbeitung des Algorithmus
 			 */
 			System.out.println("Enter drücken für Iteration: " + i);
-			BufferedReader inp = new BufferedReader (new InputStreamReader(System.in));
-			 try {
+			BufferedReader inp = new BufferedReader(new InputStreamReader(
+					System.in));
+			try {
 				inp.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -87,22 +113,27 @@ public class Main {
 			/**
 			 * Erstellung Inkrementnetzwerk
 			 */
-			Netzwerk inkrementNetz = BusackerGowen.erstelleInkrementNetzwerk(netzwerk);
+			Netzwerk inkrementNetz = BusackerGowen
+					.erstelleInkrementNetzwerk(netzwerk);
 			/**
 			 * Ausgabe des Netzwerkes und des Inkrementnetzwerks
 			 */
 			BusackerGowen.ausgabeNetzwerk("Netzwerk " + i, netzwerk);
-			BusackerGowen.ausgabeNetzwerk("Inkrementnetzwerk " + i, inkrementNetz);
+			BusackerGowen.ausgabeNetzwerk("Inkrementnetzwerk " + i,
+					inkrementNetz);
 			System.out.println("\nNetzwerk: " + netzwerk.toString());
-			System.out.println("\nInkrementnetzwerk: " + inkrementNetz.toString());
+			System.out.println("\nInkrementnetzwerk: "
+					+ inkrementNetz.toString());
 			/**
 			 * Finden eines kürzestens Weges im Inkrementnetzwerk und Ausgabe
 			 */
 			try {
 				weg = BusackerGowen.findeErweiterbarenWeg(inkrementNetz);
 				System.out.println("\nPFAD: " + weg.toString());
-				System.out.println("Minimale Kapazitaet: " + weg.getMinimaleKapazitaet(inkrementNetz) + "\n");
-				System.out.println("----------------------------------------------------------");
+				System.out.println("Minimale Kapazitaet: "
+						+ weg.getMinimaleKapazitaet(inkrementNetz) + "\n");
+				System.out
+						.println("----------------------------------------------------------");
 			} catch (Exception e) {
 				e.printStackTrace();
 				break;
@@ -110,7 +141,8 @@ public class Main {
 			/**
 			 * Vergrößerung des Flusses
 			 */
-			int fluss = BusackerGowen.vergroesserungFluss(netzwerk, inkrementNetz, weg, maxFlussstaerke);
+			int fluss = BusackerGowen.vergroesserungFluss(netzwerk,
+					inkrementNetz, weg, maxFlussstaerke);
 			/**
 			 * Neuberechnung Inkrementnetzwerk
 			 */
@@ -123,12 +155,14 @@ public class Main {
 			 * Erhöhung Iterator
 			 */
 			i++;
+			/**
+			 * Abbruchbedingung des Algorithmuses
+			 */
+		} while (weg != null && weg.isEmpty() == false
+				&& maxFlussstaerke != netzwerk.getFluss());
 		/**
-		 * Abbruchbedingung des Algorithmuses	
-		 */
-		} while (weg != null && weg.isEmpty() == false && maxFlussstaerke != netzwerk.getFluss());
-		/**
-		 * Prüfung des Netzwerks und Ausgabe des Gesamtfluss und der Gesamtkosten
+		 * Prüfung des Netzwerks und Ausgabe des Gesamtfluss und der
+		 * Gesamtkosten
 		 */
 		if (BusackerGowen.checkNetzwerk(netzwerk)) {
 			System.out.println("\nErgebnis:");
