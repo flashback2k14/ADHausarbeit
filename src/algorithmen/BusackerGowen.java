@@ -25,7 +25,7 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
 public class BusackerGowen {
 	/**
-	 * Erstelle Inkrementnetzwerk aus übergebenen Netzwerk
+	 * Erstelle Inkrementnetzwerk aus uebergebenen Netzwerk
 	 * 
 	 * @param netzwerk
 	 * @return Inkrementnetzwerk
@@ -100,7 +100,7 @@ public class BusackerGowen {
 	}
 
 	/**
-	 * Rückgabe des kürzesten Weges Ermittlung mittels Bellman-Ford-Algorithmus
+	 * Rueckgabe des kuerzesten Weges Ermittlung mittels Bellman-Ford-Algorithmus
 	 * 
 	 * @param net
 	 * @return
@@ -123,18 +123,18 @@ public class BusackerGowen {
 			}
 		}
 		/**
-		 * finden des kürzesten Weges
+		 * finden des kuerzesten Weges
 		 */
 		BellmanFord bf = new BellmanFord(inkNet);
 		weg = bf.getShortestPath(senke);
 		/**
-		 * Rückgabe des Weges
+		 * Rueckgabe des Weges
 		 */
 		return weg;
 	}
 
 	/**
-	 * Vergrößerung des Flusses
+	 * Vergroesserung des Flusses
 	 */
 	public static int vergroesserungFluss(Netzwerk netzwerk,
 			Netzwerk inkrementNetzwerk, ErweiterbarerWeg weg,
@@ -170,7 +170,7 @@ public class BusackerGowen {
 			 * 
 			 */
 			if (kante.getKapzitaet() < kante.getFluss() + fluss) {
-				throw new Exception("Der Fluss ist zu groß.");
+				throw new Exception("Der Fluss ist zu gross.");
 			}
 			/**
 			 * 
@@ -183,7 +183,7 @@ public class BusackerGowen {
 				GerichteteKante origKante = netzwerk.findEdge(start, end);
 				//
 				if (origKante.getKapzitaet() < origKante.getFluss() + fluss) {
-					throw new Exception("Der Fluss ist zu groß.");
+					throw new Exception("Der Fluss ist zu gross.");
 				}
 				//
 				origKante.setFluss(origKante.getFluss() + fluss);
@@ -192,7 +192,7 @@ public class BusackerGowen {
 				GerichteteKante origKante = netzwerk.findEdge(end, start);
 				//
 				if (origKante.getKapzitaet() < origKante.getFluss() - fluss) {
-					throw new Exception("Der Fluss ist zu groß.");
+					throw new Exception("Der Fluss ist zu gross.");
 				}
 				//
 				origKante.setFluss(origKante.getFluss() - fluss);
@@ -201,7 +201,7 @@ public class BusackerGowen {
 	}
 
 	/**
-	 * Prüfung des Netzwerks auf Gleichheit des eingehenden Fluss mit dem
+	 * Pruefung des Netzwerks auf Gleichheit des eingehenden Fluss mit dem
 	 * ausgehenden Fluss
 	 * 
 	 * @param netzwerk
@@ -213,7 +213,7 @@ public class BusackerGowen {
 
 		for (Knoten knoten : netzwerk.getVertices()) {
 			/**
-			 * Prüfung der Knoten, wenn nicht Quelle oder Senke
+			 * Pruefung der Knoten, wenn nicht Quelle oder Senke
 			 */
 			if (knoten.isQuelle() == false && knoten.isSenke() == false) {
 				int inflow = 0;
@@ -227,13 +227,13 @@ public class BusackerGowen {
 				}
 				if (outflow != inflow) {
 					/**
-					 * Ausgabe des Prüfergebnisses
+					 * Ausgabe des Pruefergebnisses
 					 */
 					return false;
 				}
 			}
 			/**
-			 * Prüfung des Quelle Knotens
+			 * Pruefung des Quelle Knotens
 			 */
 			if (knoten.isQuelle()) {
 				for (GerichteteKante outKante : netzwerk.getOutEdges(knoten)) {
@@ -241,7 +241,7 @@ public class BusackerGowen {
 				}
 			}
 			/**
-			 * Prüfung des Senke Knotens
+			 * Pruefung des Senke Knotens
 			 */
 			if (knoten.isSenke()) {
 				for (GerichteteKante inKante : netzwerk.getInEdges(knoten)) {
@@ -250,7 +250,7 @@ public class BusackerGowen {
 			}
 		}
 		/**
-		 * Ausgabe des Prüfergebnisses
+		 * Ausgabe des Pruefergebnisses
 		 */
 		return (startflow == endflow) ? true : false;
 	}

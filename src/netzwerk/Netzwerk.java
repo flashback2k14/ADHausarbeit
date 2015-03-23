@@ -28,7 +28,7 @@ public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante> 
 	}
 
 	/**
-	 * Überschreiben der Standardmethode zum Hinzufügen von Knoten Prüfung, ob
+	 * ueberschreiben der Standardmethode zum Hinzufuegen von Knoten Pruefung, ob
 	 * Knoten bereits enthalten
 	 */
 	@Override
@@ -41,7 +41,7 @@ public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante> 
 	}
 
 	/**
-	 * Überschreiben der Standardmethode zum Löschen von Knoten Prüfung, ob
+	 * ueberschreiben der Standardmethode zum Loeschen von Knoten Pruefung, ob
 	 * Knoten bereits enthalten
 	 */
 	@Override
@@ -54,7 +54,7 @@ public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante> 
 	}
 
 	/**
-	 * Rückgabe des Knotens mit übergebener ID
+	 * Rueckgabe des Knotens mit uebergebener ID
 	 * 
 	 * @param id
 	 * @return
@@ -64,7 +64,7 @@ public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante> 
 	}
 
 	/**
-	 * Rückgabe des Flusses
+	 * Rueckgabe des Flusses
 	 * 
 	 * @return
 	 */
@@ -83,7 +83,7 @@ public class Netzwerk extends DirectedSparseMultigraph<Knoten, GerichteteKante> 
 	}
 
 	/**
-	 * Rückgabe der Flusskosten
+	 * Rueckgabe der Flusskosten
 	 * 
 	 * @return
 	 */

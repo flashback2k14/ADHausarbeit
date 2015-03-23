@@ -17,7 +17,7 @@ public class ErweiterbarerWeg {
 	private List<GerichteteKante> kantenListe = null;
 
 	/**
-	 * hinzufügen eines Knotens zur Knotenliste
+	 * hinzufuegen eines Knotens zur Knotenliste
 	 * 
 	 * @param knoten
 	 */
@@ -61,7 +61,7 @@ public class ErweiterbarerWeg {
 	}
 
 	/**
-	 * Rückgabe der Minimalen Kapazität des Inkrementnetzwerks
+	 * Rueckgabe der Minimalen Kapazitaet des Inkrementnetzwerks
 	 * 
 	 * @param inkrementNetzwerk
 	 * @return
@@ -80,7 +80,7 @@ public class ErweiterbarerWeg {
 	}
 
 	/**
-	 * Rückgabe der Kantenliste des Inkrementnetzwerks
+	 * Rueckgabe der Kantenliste des Inkrementnetzwerks
 	 * 
 	 * @param inkrementNetzwerk
 	 * @return
@@ -93,7 +93,7 @@ public class ErweiterbarerWeg {
 	}
 
 	/**
-	 * Prüfung, ob Knotenliste leer ist
+	 * Pruefung, ob Knotenliste leer ist
 	 * 
 	 * @return
 	 */

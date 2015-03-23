@@ -14,7 +14,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		/**
-		 * lokale Variablen für das Netzwerk
+		 * lokale Variablen fuer das Netzwerk
 		 */
 		String path = "";
 		int quelle = 0;
@@ -48,12 +48,12 @@ public class Main {
 				maxFlussstaerke = Integer.valueOf(args[3]);
 			} catch (Exception e) {
 				System.out
-						.println("Etwas ist schief gegangen. Bitte Eingabe prüfen und wiederholen.");
+						.println("Etwas ist schief gegangen. Bitte Eingabe pruefen und wiederholen.");
 			}
 		}
 
 		/**
-		 * Erstellung des Netzwerks aus übergebener Datendatei
+		 * Erstellung des Netzwerks aus uebergebener Datendatei
 		 */
 		for (Integer[] kantenDaten : netzwerkData) {
 			Knoten knoten1 = netzwerk.getVertexById(kantenDaten[0]);
@@ -82,12 +82,12 @@ public class Main {
 		 */
 		System.out
 				.println("----------------------------------------------------------");
-		System.out.println("Kostenminimale Flüsse im Netzwerk");
+		System.out.println("Kostenminimale Fluesse im Netzwerk");
 		System.out
 				.println("----------------------------------------------------------");
 		System.out.println("Quelle ist Knoten: " + quelle);
 		System.out.println("Senke ist Knoten: " + senke);
-		System.out.println("Flussstärke: " + maxFlussstaerke);
+		System.out.println("Flussstaerke: " + maxFlussstaerke);
 		System.out
 				.println("----------------------------------------------------------");
 		/**
@@ -95,14 +95,14 @@ public class Main {
 		 */
 		int i = 1;
 		/**
-		 * Ausführung des Algorithmus zum Finden von kostenminimalen Flüssen in
+		 * Ausfuehrung des Algorithmus zum Finden von kostenminimalen Fluessen in
 		 * einem Netzwerk
 		 */
 		do {
 			/**
 			 * Schrittweise Abarbeitung des Algorithmus
 			 */
-			System.out.println("Enter drücken für Iteration: " + i);
+			System.out.println("Enter druecken fuer Iteration: " + i);
 			BufferedReader inp = new BufferedReader(new InputStreamReader(
 					System.in));
 			try {
@@ -125,7 +125,7 @@ public class Main {
 			System.out.println("\nInkrementnetzwerk: "
 					+ inkrementNetz.toString());
 			/**
-			 * Finden eines kürzestens Weges im Inkrementnetzwerk und Ausgabe
+			 * Finden eines kuerzestens Weges im Inkrementnetzwerk und Ausgabe
 			 */
 			try {
 				weg = BusackerGowen.findeErweiterbarenWeg(inkrementNetz);
@@ -139,7 +139,7 @@ public class Main {
 				break;
 			}
 			/**
-			 * Vergrößerung des Flusses
+			 * Vergroesserung des Flusses
 			 */
 			int fluss = BusackerGowen.vergroesserungFluss(netzwerk,
 					inkrementNetz, weg, maxFlussstaerke);
@@ -152,7 +152,7 @@ public class Main {
 				e.printStackTrace();
 			}
 			/**
-			 * Erhöhung Iterator
+			 * Erhoehung Iterator
 			 */
 			i++;
 			/**
@@ -161,7 +161,7 @@ public class Main {
 		} while (weg != null && weg.isEmpty() == false
 				&& maxFlussstaerke != netzwerk.getFluss());
 		/**
-		 * Prüfung des Netzwerks und Ausgabe des Gesamtfluss und der
+		 * Pruefung des Netzwerks und Ausgabe des Gesamtfluss und der
 		 * Gesamtkosten
 		 */
 		if (BusackerGowen.checkNetzwerk(netzwerk)) {

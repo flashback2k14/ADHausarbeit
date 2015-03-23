@@ -36,7 +36,7 @@ public class Knoten {
 	}
 
 	/**
-	 * Prüfung, ob Knoten eine Quelle ist.
+	 * Pruefung, ob Knoten eine Quelle ist.
 	 * 
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public class Knoten {
 	}
 
 	/**
-	 * Prüfung, ob Knoten eine Senke ist.
+	 * Pruefung, ob Knoten eine Senke ist.
 	 * 
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public class Knoten {
 	}
 
 	/**
-	 * Rückgabe der Knoten ID
+	 * Rueckgabe der Knoten ID
 	 * 
 	 * @return
 	 */

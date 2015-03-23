@@ -33,7 +33,7 @@ public class GerichteteKante {
 	}
 
 	/**
-	 * Getter / Setter Kapazität
+	 * Getter / Setter Kapazitaet
 	 * 
 	 * @return
 	 */

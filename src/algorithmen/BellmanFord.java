@@ -21,8 +21,8 @@ public class BellmanFord {
 	final Integer INFINITY = Integer.MAX_VALUE;
 
 	/**
-	 * Konstruktor + Initialisierung der benötigten Werte zum Finden des
-	 * kürzesten Weges
+	 * Konstruktor + Initialisierung der benoetigten Werte zum Finden des
+	 * kuerzesten Weges
 	 * 
 	 * @param netz
 	 * @throws Exception
@@ -41,7 +41,7 @@ public class BellmanFord {
 			pred.put(knoten, knoten);
 		}
 		/**
-		 * wiederholtes entspannen der Kanten
+		 * Relaxierte Kanten wiederholten
 		 */
 		for (int i = 0; i < netz.getVertexCount(); i++) {
 			for (GerichteteKante kante : netz.getEdges()) {
@@ -59,7 +59,7 @@ public class BellmanFord {
 			}
 		}
 		/**
-		 * Prüfung auf Zyklen mit negativen Kosten / Gewicht
+		 * Pruefung auf Zyklen mit negativen Kosten / Gewicht
 		 */
 		for (GerichteteKante kante : netz.getEdges()) {
 			Knoten start = netz.getSource(kante);
@@ -69,13 +69,13 @@ public class BellmanFord {
 			if ((dist.get(start) != Integer.MAX_VALUE)
 					&& (dist.get(start) + gewicht < dist.get(end))) {
 				throw new Exception(
-						"Graph enthält Zyklus mit negativen Kosten / Gewicht.");
+						"Graph enthaelt Zyklus mit negativen Kosten / Gewicht.");
 			}
 		}
 	}
 
 	/**
-	 * Rückgabe des kürzesten Weges
+	 * Rueckgabe des kuerzesten Weges
 	 * 
 	 * @param end
 	 * @return

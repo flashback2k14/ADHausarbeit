@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Util {
 	/**
-	 * Einlesen der Daten und Rückgabe der Daten
+	 * Einlesen der Daten und Rueckgabe der Daten
 	 * 
 	 * @param path
 	 * @return
